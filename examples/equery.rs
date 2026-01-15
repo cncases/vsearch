@@ -1,5 +1,3 @@
-use std::time::Duration;
-
 use fastembed::{EmbeddingModel, InitOptions, TextEmbedding};
 use qdrant_client::{
     Qdrant,
@@ -44,22 +42,10 @@ async fn main() {
             .as_ref()
             .unwrap();
         match id {
-            PointIdOptions::Num(id_num) => {
-                let (case_id, chunk_id) = split_id(*id_num);
-                println!(
-                    "Point ID: {}, Case ID: {}, Chunk ID: {}",
-                    id_num, case_id, chunk_id
-                );
+            PointIdOptions::Num(id) => {
+                println!("Point ID: {}", id);
             }
-            PointIdOptions::Uuid(uuid) => {
-                println!("Point UUID: {}", uuid);
-            }
+            _ => {}
         }
     }
-}
-
-fn split_id(id: u64) -> (u32, u32) {
-    let case_id = (id >> 32) as u32;
-    let chunk_id = (id & 0xFFFF_FFFF) as u32;
-    (case_id, chunk_id)
 }

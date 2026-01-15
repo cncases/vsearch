@@ -9,6 +9,7 @@ pub struct Config {
     pub collection_name: String,
     pub qdrant_rpc: String,
     pub batch_size: Option<usize>,
+    pub progress: Option<u32>,
 }
 
 impl Config {
