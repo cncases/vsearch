@@ -1,0 +1,4 @@
+db = "fjall"
+batch_size = 64
+qdrant_rpc = "http://localhost:6334"
+collection_name = "cases"
