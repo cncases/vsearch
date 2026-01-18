@@ -20,7 +20,7 @@ async fn main() {
         .with(tracing_subscriber::EnvFilter::new("info,ort=warn"))
         .with(tracing_subscriber::fmt::layer())
         .init();
-    let client = Qdrant::from_url(&*CONFIG.qdrant_rpc).build().unwrap();
+    let client = Qdrant::from_url(&CONFIG.qdrant_rpc).build().unwrap();
 
     let batch_size = CONFIG.batch_size.unwrap_or(64);
     info!("batch size: {}", batch_size);
@@ -66,12 +66,10 @@ async fn main() {
 
     let progress = if let Some(p) = CONFIG.progress {
         p
+    } else if let Some(b) = progress_ks.get("progress").unwrap() {
+        u32::from_be_bytes(b[..].try_into().unwrap())
     } else {
-        if let Some(b) = progress_ks.get("progress").unwrap() {
-            u32::from_be_bytes(b[..].try_into().unwrap())
-        } else {
-            0
-        }
+        0
     };
 
     info!("Progress: {progress}");
@@ -141,7 +139,7 @@ fn remove_html_tags(html: &str) -> String {
         .join("\n")
 }
 
-async fn upload_embeddings(embeddings: Vec<Vec<f32>>, ids: &Vec<u64>, client: &Qdrant) {
+async fn upload_embeddings(embeddings: Vec<Vec<f32>>, ids: &[u64], client: &Qdrant) {
     let mut points = Vec::with_capacity(embeddings.len());
     for (i, embedding) in embeddings.into_iter().enumerate() {
         let id = ids[i];
