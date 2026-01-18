@@ -30,3 +30,5 @@ or with CUDA support:
 ```bash
 cargo build --release --features cuda
 ```
+
+Note: Ensure you could connect to the Hugging Face, you may need to set the `HTTPS_PROXY` and `HTTP_PROXY` environment variables.
