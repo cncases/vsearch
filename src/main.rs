@@ -50,7 +50,10 @@ async fn main() {
     )
     .unwrap();
 
-    let keyspace = Config::new(CONFIG.db.as_str()).open().unwrap();
+    let keyspace = Config::new(CONFIG.db.as_str())
+        .fsync_ms(Some(1000))
+        .open()
+        .unwrap();
     let db = keyspace
         .open_partition("cases", kv_sep_partition_option())
         .unwrap();
