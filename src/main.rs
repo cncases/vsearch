@@ -38,9 +38,13 @@ async fn main() {
     };
     #[cfg(not(feature = "cuda"))]
     let eps = vec![];
+    let model = match CONFIG.embedding_model {
+        2 => EmbeddingModel::BGELargeZHV15,
+        _ => EmbeddingModel::BGESmallZHV15,
+    };
 
     let mut model = TextEmbedding::try_new(
-        InitOptions::new(EmbeddingModel::BGESmallZHV15)
+        InitOptions::new(model)
             .with_show_download_progress(true)
             .with_execution_providers(eps),
     )

@@ -1,8 +1,11 @@
 # vsearch
 
-### qdrant
+A vector search tool powered by Qdrant and ONNX Runtime.
 
-https://github.com/qdrant/qdrant/blob/master/tools/sync-web-ui.sh
+## Usage
+
+1. Set up [Qdrant server](https://qdrant.tech/).
+2. Create a collection with appropriate vector size and distance metric. BGESmallZHV15 uses 512-dimensional vectors, BGELargeZHV15 uses 1024-dimensional vectors. Example for BGESmallZHV15:
 
 ```bash
 curl -X PUT "http://localhost:6333/collections/cases" \
@@ -15,11 +18,15 @@ curl -X PUT "http://localhost:6333/collections/cases" \
   }'
 ```
 
-```yml
-log_level: INFO
-storage:
-  hnsw_index:
-    on_disk: true
+3. Configure `config.toml` with your settings.
+4. Run the application:
 
-telemetry_disabled: true
+```bash
+cargo build --release
+```
+
+or with CUDA support:
+
+```bash
+cargo build --release --features cuda
 ```

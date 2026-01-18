@@ -6,8 +6,9 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(Config::load_config);
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Config {
     pub db: String,
-    pub collection_name: String,
     pub qdrant_rpc: String,
+    pub embedding_model: u8,
+    pub collection_name: String,
     pub batch_size: Option<usize>,
     pub progress: Option<u32>,
 }

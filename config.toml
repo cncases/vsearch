@@ -1,4 +1,5 @@
-db = "fjall"
-batch_size = 64
-qdrant_rpc = "http://localhost:6334"
-collection_name = "cases"
+db = "fjall"                           # Path to the key-value database, see github.com/cncases/cases
+qdrant_grpc = "http://localhost:6334"  # Qdrant gRPC address
+embedding_model = 1                    # 1: BGESmallZHV15, 2: BGELargeZHV15
+collection_name = "cases"              # Qdrant collection name
+batch_size = 128                       # Optional: batch size for processing, if oom, reduce this value
