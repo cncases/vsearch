@@ -77,7 +77,8 @@ async fn main() {
 
     info!("Progress: {progress}");
 
-    for i in db.iter() {
+    let progress_id = progress.to_be_bytes();
+    for i in db.range(progress_id..) {
         let (k, v) = i.unwrap();
         let id = u32::from_be_bytes(k[..].try_into().unwrap());
         if id % 10000 == 0 {
