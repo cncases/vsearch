@@ -20,7 +20,7 @@ async fn main() {
         .with(tracing_subscriber::EnvFilter::new("info,ort=warn"))
         .with(tracing_subscriber::fmt::layer())
         .init();
-    let client = Qdrant::from_url(&CONFIG.qdrant_rpc).build().unwrap();
+    let client = Qdrant::from_url(&CONFIG.qdrant_grpc).build().unwrap();
 
     let batch_size = CONFIG.batch_size.unwrap_or(64);
     info!("batch size: {}", batch_size);
@@ -89,7 +89,7 @@ async fn main() {
         }
 
         let (case, _): (Case, _) = bincode::decode_from_slice(&v, standard()).unwrap();
-        if case.case_type != "刑事案件" {
+        if !case.case_type.starts_with("刑事") {
             continue;
         }
         if case.full_text.is_empty() {
