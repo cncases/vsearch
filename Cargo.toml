@@ -6,7 +6,7 @@ edition = "2024"
 [dependencies]
 basic-toml = "*"
 bincode = "2.0.1"
-fastembed = { version = "5.8.1", features = ["hf-hub-rustls-tls", "ort-download-binaries"], default-features = false }
+fastembed = { version = "5.9.0", features = ["hf-hub-rustls-tls", "ort-download-binaries"], default-features = false }
 fjall = { version = "2.11.2", default-features = false, features = [
     "single_writer_tx",
     "miniz",
