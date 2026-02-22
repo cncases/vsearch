@@ -11,7 +11,7 @@ fjall = { version = "2.11.2", default-features = false, features = [
     "single_writer_tx",
     "miniz",
 ] }
-qdrant-client = "1.16.0"
+qdrant-client = "1.17.0"
 scraper = "0.25.0"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
