@@ -12,7 +12,7 @@ fjall = { version = "2.11.2", default-features = false, features = [
     "miniz",
 ] }
 qdrant-client = "1.17.0"
-scraper = "0.25.0"
+scraper = "0.26.0"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
